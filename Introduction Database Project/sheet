@@ -1,0 +1,41 @@
+$db = "(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 202.44.47.68) (PORT = 1521)))(CONNECT_DATA = (SID = introdb)))";
+ 
+  $connect = oci_connect("6106021620125","6106021620125",$db,"AL32UTF8");
+
+
+  if($connect){
+      echo "ต่อได้แล้ว";
+  }else{
+    echo "ต่อยังไม่ได้นะจ้ะ ";
+    $error = oci_error();
+    trigger_error(htmlentitles($error['message'], E_QUOTES), E_USER_ERROR); }
+
+
+
+    ตารางโง่ๆ ที่ต้องใช้ 
+ <html>
+<title> index </title>
+<head> รายชื่อพนักงาน </head>
+<body>
+<table border = 1>
+  <tr>
+    <td> รหัสพนักงาน </td>
+    <td> ชื่อพนักงาน </td>
+    <td> BK </td>
+    <td> DS </td>
+ </tr>
+  <?php
+    while($objResult = oci_fetch_array($objParse,OCI_BOTH))
+    {
+  ?>
+  <tr>
+    <td><?php echo $objResult['EMP_ID']; ?></td>
+    <td><?php echo $objResult['NAME']; ?></td>
+    <td><?php echo $objResult['BK']; ?></td>
+    <td><?php echo $objResult['DS']; ?></td>
+ </tr> 
+ <?php
+    }
+ ?>
+ </table>
+</body>
